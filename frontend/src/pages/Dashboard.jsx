@@ -1,13 +1,17 @@
-function Dashboard() {
-  return (
-    <div className="dashboard">
-      <h1>WebPilot AI</h1>
+import MainLayout from "../layouts/MainLayout";
 
-      <p>
-        Autonomous Browser Agent powered by Spring AI + Playwright
-      </p>
-    </div>
-  );
+function Dashboard() {
+    return (
+        <MainLayout>
+
+            <h1>Dashboard</h1>
+
+            <p>
+                Welcome to WebPilot AI
+            </p>
+
+        </MainLayout>
+    );
 }
 
 export default Dashboard;
