@@ -1,21 +1,14 @@
 package com.webpilot.browser;
 
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.stereotype.Component;
+import lombok.Builder;
+import lombok.Data;
 
-@Getter
-@Setter
-@Component
+@Data
+@Builder
 public class BrowserSession {
 
-    private Browser browser;
-
-    private BrowserContext context;
-
+    private String sessionId;
     private Page page;
 
 }

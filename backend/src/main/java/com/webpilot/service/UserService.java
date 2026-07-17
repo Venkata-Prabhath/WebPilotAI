@@ -1,13 +1,15 @@
 package com.webpilot.service;
 
-import com.webpilot.dto.AuthResponse;
-import com.webpilot.dto.LoginRequest;
-import com.webpilot.dto.RegisterRequest;
+import com.webpilot.entity.User;
+
+import java.util.List;
 
 public interface UserService {
 
-    String register(RegisterRequest request);
+    User save(User user);
 
-    AuthResponse login(LoginRequest request);
+    User findById(Long id);
+
+    List<User> findAll();
 
 }
