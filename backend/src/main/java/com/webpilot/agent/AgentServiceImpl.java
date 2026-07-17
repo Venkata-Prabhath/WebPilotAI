@@ -1,33 +1,36 @@
 package com.webpilot.agent;
 
 import com.webpilot.browser.BrowserService;
+import com.webpilot.dto.BrowserAction;
+import com.webpilot.service.AIService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class AgentServiceImpl implements AgentService {
 
     private final BrowserService browserService;
+    private final AIService aiService;
 
     @Override
     public String executeTask(String task) {
 
-        String lowerTask = task.toLowerCase();
+        List<BrowserAction> plan = aiService.generatePlan(task);
 
-        if (lowerTask.startsWith("open ")) {
+        for (BrowserAction action : plan) {
 
-            String url = task.substring(5).trim();
+            switch (action.getAction()) {
 
-            if (!url.startsWith("http")) {
-                url = "https://" + url;
+                case "open" ->
+                        browserService.openWebsite(action.getValue());
+
+                case "search" ->
+                        browserService.searchGoogle(action.getValue());
             }
-
-            return browserService.openWebsite(url);
         }
-
-        browserService.openWebsite("https://www.google.com");
-        browserService.searchGoogle(task);
 
         return "AI Agent executed task: " + task;
     }

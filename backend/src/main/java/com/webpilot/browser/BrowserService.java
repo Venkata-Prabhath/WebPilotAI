@@ -6,6 +6,14 @@ public interface BrowserService {
 
     String searchGoogle(String query);
 
+    String click(String selector);
+
+    String type(String selector, String text);
+
+    String waitFor(int milliseconds);
+
+    String takeScreenshot(String fileName);
+
     String closeBrowser();
 
 }
