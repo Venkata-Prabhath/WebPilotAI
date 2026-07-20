@@ -1,6 +1,6 @@
 package com.webpilot.controller;
 
-import com.webpilot.agent.AgentService;
+import com.webpilot.service.ExecutionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AgentController {
 
-    private final AgentService agentService;
+    private final ExecutionService executionService;
 
     @PostMapping("/execute")
     public String execute(@RequestBody String prompt) {
-        return agentService.executeTask(prompt);
-    }
 
+        // TODO: Replace with the actual task ID after creating a Task.
+        executionService.runTask(1L, prompt);
+
+        return "Task started";
+    }
 }

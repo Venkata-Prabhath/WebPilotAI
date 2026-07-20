@@ -1,76 +1,78 @@
 import {
-    Globe,
-    RefreshCcw,
-    ArrowLeft,
-    ArrowRight,
-    House
+  Globe,
+  Lock,
+  ArrowLeft,
+  ArrowRight,
+  RefreshCcw,
+  House,
 } from "lucide-react";
 
 const BrowserToolbar = ({
-    currentUrl,
-    onNavigate,
-    onRefresh,
-    onBack,
-    onForward,
-    onHome
+  currentUrl,
+  onNavigate,
+  onRefresh,
+  onBack,
+  onForward,
+  onHome,
 }) => {
+  return (
+    <div className="border-b border-[#262626] bg-[#101010] px-5 py-4">
 
-    return (
+      <div className="flex items-center gap-3">
 
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+        <button
+          onClick={onBack}
+          className="w-10 h-10 rounded-xl bg-[#1A1A1A] hover:bg-[#232323] transition flex items-center justify-center"
+        >
+          <ArrowLeft size={18} className="text-gray-400" />
+        </button>
 
-            <div className="flex items-center gap-3">
+        <button
+          onClick={onForward}
+          className="w-10 h-10 rounded-xl bg-[#1A1A1A] hover:bg-[#232323] transition flex items-center justify-center"
+        >
+          <ArrowRight size={18} className="text-gray-400" />
+        </button>
 
-                <button
-                    onClick={onBack}
-                    className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700"
-                >
-                    <ArrowLeft className="text-white" size={18} />
-                </button>
+        <button
+          onClick={onRefresh}
+          className="w-10 h-10 rounded-xl bg-[#1A1A1A] hover:bg-[#232323] transition flex items-center justify-center"
+        >
+          <RefreshCcw size={17} className="text-gray-400" />
+        </button>
 
-                <button
-                    onClick={onForward}
-                    className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700"
-                >
-                    <ArrowRight className="text-white" size={18} />
-                </button>
+        <button
+          onClick={onHome}
+          className="w-10 h-10 rounded-xl bg-[#1A1A1A] hover:bg-[#232323] transition flex items-center justify-center"
+        >
+          <House size={18} className="text-gray-400" />
+        </button>
 
-                <button
-                    onClick={onRefresh}
-                    className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700"
-                >
-                    <RefreshCcw className="text-white" size={18} />
-                </button>
+        <div className="flex-1 flex items-center gap-3 rounded-xl bg-[#181818] border border-[#2A2A2A] px-4 py-3">
 
-                <button
-                    onClick={onHome}
-                    className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700"
-                >
-                    <House className="text-white" size={18} />
-                </button>
+          <Lock
+            size={16}
+            className="text-green-400"
+          />
 
-                <div className="flex-1 relative">
+          <Globe
+            size={16}
+            className="text-gray-500"
+          />
 
-                    <Globe
-                        size={18}
-                        className="absolute left-3 top-3 text-slate-400"
-                    />
-
-                    <input
-                        value={currentUrl}
-                        onChange={(e) => onNavigate(e.target.value)}
-                        placeholder="Enter URL..."
-                        className="w-full pl-10 pr-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white outline-none"
-                    />
-
-                </div>
-
-            </div>
+          <input
+            value={currentUrl}
+            onChange={(e) => onNavigate(e.target.value)}
+            placeholder="https://..."
+            className="flex-1 bg-transparent outline-none text-sm text-white placeholder:text-gray-500"
+          />
 
         </div>
 
-    );
+      </div>
 
+    </div>
+  );
 };
 
 export default BrowserToolbar;

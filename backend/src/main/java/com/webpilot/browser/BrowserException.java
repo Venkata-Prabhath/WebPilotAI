@@ -6,4 +6,8 @@ public class BrowserException extends RuntimeException {
         super(message);
     }
 
+    public BrowserException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }

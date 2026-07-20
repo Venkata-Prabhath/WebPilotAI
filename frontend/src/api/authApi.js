@@ -10,8 +10,7 @@ export const register = async (userData) => {
   return response.data;
 };
 
-// Add this function:
-export const verifyCode = async (verificationData) => {
-  const response = await apiClient.post("/auth/verify", verificationData);
+export const verifyCode = async (data) => {
+  const response = await apiClient.post("/auth/verify", data);
   return response.data;
 };

@@ -2,10 +2,20 @@ package com.webpilot.agent;
 
 public enum AgentState {
 
-    CREATED,
+    IDLE,
+
     PLANNING,
+
     EXECUTING,
+
+    WAITING,
+
+    OBSERVING,
+
+    ANALYZING,
+
     COMPLETED,
+
     FAILED
 
 }

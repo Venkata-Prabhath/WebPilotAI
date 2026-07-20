@@ -1,34 +1,31 @@
 import Sidebar from "./Sidebar";
 import Header from "./Header";
-import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
+  return (
+    <div className="flex h-screen bg-[#090909] text-white overflow-hidden">
 
-    return (
+      <Sidebar />
 
-        <div className="flex bg-[#020617] min-h-screen">
+      <div className="flex flex-col flex-1 overflow-hidden">
 
-            <Sidebar />
+        <Header />
 
-            <div className="flex-1 flex flex-col">
+        <main className="flex-1 overflow-y-auto p-8 bg-[#090909]">
 
-                <Header />
+          <div className="max-w-7xl mx-auto">
 
-                <main className="flex-1 p-8 overflow-y-auto">
+            <Outlet />
 
-                    <Outlet />
+          </div>
 
-                </main>
+        </main>
 
-                <Footer />
+      </div>
 
-            </div>
-
-        </div>
-
-    );
-
+    </div>
+  );
 };
 
 export default MainLayout;

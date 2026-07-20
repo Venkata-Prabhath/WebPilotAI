@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -10,13 +10,13 @@ class ErrorBoundary extends React.Component {
     return { hasError: true };
   }
 
+  componentDidCatch(error, errorInfo) {
+    console.error("ErrorBoundary caught an error:", error, errorInfo);
+  }
+
   render() {
     if (this.state.hasError) {
-      return (
-        <div className="flex items-center justify-center h-screen bg-slate-950 text-white">
-          <h1>Something went wrong. Please refresh the page.</h1>
-        </div>
-      );
+      return <div className="p-10 text-center text-white">Something went wrong.</div>;
     }
     return this.props.children;
   }

@@ -5,7 +5,12 @@ export const getTasks = async () => {
   return response.data;
 };
 
-export const createTask = async (taskData) => {
-  const response = await apiClient.post("/tasks", taskData);
+export const getTask = async (id) => {
+  const response = await apiClient.get(`/tasks/${id}`);
+  return response.data;
+};
+
+export const executeTask = async (taskData) => {
+  const response = await apiClient.post("/tasks/execute", taskData);
   return response.data;
 };

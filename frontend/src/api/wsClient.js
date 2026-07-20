@@ -1,21 +1,32 @@
-import SockJS from 'sockjs-client';
-import { Client } from '@stomp/stompjs';
+import SockJS from "sockjs-client";
+import { Client } from "@stomp/stompjs";
 
-let stompClient = null;
+let client = null;
 
-export const connectWebSocket = () => {
-  const socket = new SockJS('http://localhost:8084/ws-browser');
-  stompClient = new Client({
-    webSocketFactory: () => socket,
-    debug: (str) => console.log(str),
+export const connectWebSocket = (taskId, onMessageReceived) => {
+  client = new Client({
+    webSocketFactory: () => new SockJS("http://localhost:8084/ws"),
+
+    onConnect: () => {
+      client.subscribe(`/topic/progress/${taskId}`, (message) => {
+        if (onMessageReceived) {
+          onMessageReceived(JSON.parse(message.body));
+        }
+      });
+    },
+
+    onStompError: (frame) => {
+      console.error("WebSocket Error:", frame);
+    },
   });
 
-  stompClient.activate();
-  return stompClient;
+  client.activate();
+  return client;
 };
 
 export const disconnectWebSocket = () => {
-  if (stompClient) {
-    stompClient.deactivate();
+  if (client) {
+    client.deactivate();
+    client = null;
   }
 };

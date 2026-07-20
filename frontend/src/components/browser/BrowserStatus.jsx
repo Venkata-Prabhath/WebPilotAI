@@ -1,46 +1,117 @@
-import { Activity } from "lucide-react";
+import {
+  Activity,
+  CheckCircle2,
+  Loader2,
+  AlertTriangle,
+  Clock3,
+} from "lucide-react";
 
 const BrowserStatus = ({ status = "Idle" }) => {
 
-    const color =
-        status === "Running"
-            ? "bg-green-500"
-            : status === "Failed"
-            ? "bg-red-500"
-            : "bg-yellow-500";
+  const config = {
+    Idle: {
+      icon: <Clock3 size={22} />,
+      color: "text-yellow-400",
+      bg: "bg-yellow-500/10",
+      border: "border-yellow-500/20",
+      title: "Waiting",
+      desc: "Ready to execute a new task.",
+    },
 
-    return (
+    Running: {
+      icon: <Loader2 size={22} className="animate-spin" />,
+      color: "text-[#D4AF37]",
+      bg: "bg-[#D4AF37]/10",
+      border: "border-[#D4AF37]/20",
+      title: "Executing",
+      desc: "WebPilot is browsing and collecting information.",
+    },
 
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+    Completed: {
+      icon: <CheckCircle2 size={22} />,
+      color: "text-green-400",
+      bg: "bg-green-500/10",
+      border: "border-green-500/20",
+      title: "Completed",
+      desc: "Task finished successfully.",
+    },
 
-            <div className="flex items-center justify-between">
+    Failed: {
+      icon: <AlertTriangle size={22} />,
+      color: "text-red-400",
+      bg: "bg-red-500/10",
+      border: "border-red-500/20",
+      title: "Failed",
+      desc: "Execution stopped due to an error.",
+    },
+  };
 
-                <div className="flex items-center gap-3">
+  const current = config[status] || config.Idle;
 
-                    <Activity className="text-blue-400" />
+  return (
+    <div className="rounded-3xl border border-[#2A2A2A] bg-[#141414] p-6">
 
-                    <h2 className="text-white font-semibold">
-                        Browser Status
-                    </h2>
+      <div className="flex items-center justify-between">
 
-                </div>
+        <div className="flex items-center gap-4">
 
-                <div className="flex items-center gap-2">
-
-                    <div className={`w-3 h-3 rounded-full ${color}`} />
-
-                    <span className="text-slate-300">
-                        {status}
-                    </span>
-
-                </div>
-
+          <div
+            className={`w-14 h-14 rounded-2xl flex items-center justify-center ${current.bg} ${current.border} border`}
+          >
+            <div className={current.color}>
+              {current.icon}
             </div>
+          </div>
+
+          <div>
+
+            <h2 className="text-xl font-semibold text-white">
+              {current.title}
+            </h2>
+
+            <p className="text-gray-500 mt-1">
+              {current.desc}
+            </p>
+
+          </div>
 
         </div>
 
-    );
+        <div className="flex items-center gap-3 rounded-full border border-[#2A2A2A] bg-[#101010] px-4 py-2">
 
+          <Activity
+            size={18}
+            className={current.color}
+          />
+
+          <span className={`font-medium ${current.color}`}>
+            {status}
+          </span>
+
+        </div>
+
+      </div>
+
+      {status === "Running" && (
+
+        <div className="mt-6">
+
+          <div className="w-full h-2 rounded-full bg-[#202020] overflow-hidden">
+
+            <div className="h-full w-1/3 rounded-full bg-[#D4AF37] animate-pulse" />
+
+          </div>
+
+          <p className="text-xs text-gray-500 mt-3">
+            AI Agent is executing browser actions...
+          </p>
+
+        </div>
+
+      )}
+
+    </div>
+  );
 };
 
 export default BrowserStatus;

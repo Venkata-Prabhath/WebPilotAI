@@ -1,22 +1,44 @@
-const RecentTasks = ({ tasks = [] }) => {
+const RecentTasks = ({ tasks = [], loading }) => {
 
     return (
 
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <div className="bg-[#141414] rounded-3xl border border-[#2A2A2A] p-8">
 
-            <h2 className="text-xl text-white font-semibold mb-5">
+            <div className="flex justify-between items-center mb-8">
 
-                Recent Tasks
+                <h2 className="text-2xl font-semibold text-white">
 
-            </h2>
+                    Recent Tasks
 
-            {tasks.length === 0 ? (
+                </h2>
 
-                <p className="text-slate-500">
+            </div>
 
-                    No tasks available
+            {loading ? (
 
-                </p>
+                <div className="text-gray-500">
+
+                    Loading...
+
+                </div>
+
+            ) : tasks.length === 0 ? (
+
+                <div className="text-center py-20">
+
+                    <h3 className="text-xl text-white">
+
+                        No Tasks Yet
+
+                    </h3>
+
+                    <p className="text-gray-500 mt-3">
+
+                        Execute your first AI task to see history.
+
+                    </p>
+
+                </div>
 
             ) : (
 
@@ -25,23 +47,30 @@ const RecentTasks = ({ tasks = [] }) => {
                     {tasks.map((task) => (
 
                         <div
+
                             key={task.id}
-                            className="flex justify-between items-center border-b border-slate-800 pb-3"
+
+                            className="bg-[#1A1A1A] hover:bg-[#202020] rounded-2xl border border-[#2A2A2A] p-6 transition"
+
                         >
 
-                            <div>
+                            <div className="flex justify-between">
 
-                                <p className="text-white">
+                                <div>
 
-                                    {task.prompt}
+                                    <h3 className="text-white font-semibold">
 
-                                </p>
+                                        {task.prompt}
 
-                                <small className="text-slate-500">
+                                    </h3>
 
-                                    {task.status}
+                                    <p className="text-gray-500 mt-2">
 
-                                </small>
+                                        {task.status}
+
+                                    </p>
+
+                                </div>
 
                             </div>
 

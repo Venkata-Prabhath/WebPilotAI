@@ -1,39 +1,38 @@
-import { Bell, UserCircle } from "lucide-react";
+import { Bell, Search } from "lucide-react";
+import UserMenu from "../common/UserMenu";
 
 const Header = () => {
+  return (
+    <header className="h-20 border-b border-[#2A2A2A] bg-[#090909] flex items-center justify-between px-10">
 
-    return (
+      <div className="relative w-[420px]">
 
-        <header className="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-8">
+        <Search
+          size={18}
+          className="absolute left-4 top-4 text-gray-500"
+        />
 
-            <div>
+        <input
+          placeholder="Search tasks..."
+          className="w-full bg-[#151515] border border-[#2A2A2A] rounded-xl py-3 pl-11 pr-4 text-white outline-none focus:border-[#D4AF37] transition"
+        />
 
-                <h1 className="text-2xl font-bold text-white">
-                    WebPilot
-                </h1>
+      </div>
 
-            </div>
+      <div className="flex items-center gap-6">
 
-            <div className="flex items-center gap-5">
+        <button className="text-gray-400 hover:text-[#D4AF37] transition">
 
-                <button className="text-slate-400 hover:text-white">
+          <Bell size={22} />
 
-                    <Bell size={22} />
+        </button>
 
-                </button>
+        <UserMenu />
 
-                <button className="text-slate-400 hover:text-white">
+      </div>
 
-                    <UserCircle size={28} />
-
-                </button>
-
-            </div>
-
-        </header>
-
-    );
-
+    </header>
+  );
 };
 
 export default Header;

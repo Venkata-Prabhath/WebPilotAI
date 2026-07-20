@@ -6,52 +6,44 @@ import Dashboard from "../pages/Dashboard";
 import Browser from "../pages/Browser";
 import Tasks from "../pages/Tasks";
 import Settings from "../pages/Settings";
-import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
 
 import ProtectedRoute from "./ProtectedRoute";
 import MainLayout from "../components/layout/MainLayout";
 
 const AppRoutes = () => {
+  return (
+    <BrowserRouter>
 
-    return (
+      <Routes>
 
-        <BrowserRouter>
+        <Route path="/" element={<Login />} />
 
-            <Routes>
+        <Route path="/register" element={<Register />} />
 
-                <Route path="/" element={<Login />} />
+        <Route
+          element={
+            <ProtectedRoute>
+              <MainLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="/dashboard" element={<Dashboard />} />
 
-                <Route path="/register" element={<Register />} />
+          <Route path="/browser" element={<Browser />} />
 
-                <Route
-                    element={
-                        <ProtectedRoute>
-                            <MainLayout />
-                        </ProtectedRoute>
-                    }
-                >
+          <Route path="/tasks" element={<Tasks />} />
 
-                    <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/settings" element={<Settings />} />
 
-                    <Route path="/browser" element={<Browser />} />
+        </Route>
 
-                    <Route path="/tasks" element={<Tasks />} />
+        <Route path="*" element={<NotFound />} />
 
-                    <Route path="/settings" element={<Settings />} />
+      </Routes>
 
-                    <Route path="/profile" element={<Profile />} />
-
-                </Route>
-
-                <Route path="*" element={<NotFound />} />
-
-            </Routes>
-
-        </BrowserRouter>
-
-    );
-
+    </BrowserRouter>
+  );
 };
 
 export default AppRoutes;

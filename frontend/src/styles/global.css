@@ -12,19 +12,35 @@ body,
 }
 
 body{
-    background:#020617;
+    background:#090909;
     color:white;
     font-family:Inter,sans-serif;
 }
 
-input[type="password"] {
-  color: white; 
-  -webkit-text-security: disc;
-  text-security: disc;
-  color: black !important; 
+*{
+    box-sizing:border-box;
 }
 
-input[type="text"], 
-input[type="email"] {
-  color: white;
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:#090909;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#2A2A2A;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#D4AF37;
+}
+
+input,
+button,
+textarea,
+select{
+    font-family:inherit;
 }

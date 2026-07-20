@@ -1,73 +1,170 @@
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState,useContext } from "react";
+import { Link,useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import Button from "../common/Button";
+import Input from "../common/Input";
 
-const RegisterForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const RegisterForm=()=>{
 
-  const { registerUser, loginUser } = useContext(AuthContext);
-  const navigate = useNavigate();
+    const[name,setName]=useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    const[email,setEmail]=useState("");
 
-    try {
-      const response = await registerUser({
-        name,
-        email,
-        password,
-      });
+    const[password,setPassword]=useState("");
 
-      if (response && response.token) {
-        loginUser(response.token);
-        navigate("/dashboard");
-      } else {
-        navigate("/login");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Registration failed");
-    }
-  };
+    const[loading,setLoading]=useState(false);
 
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <h2 className="text-xl text-white">Create Account</h2>
+    const{
 
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className="w-full p-2 bg-gray-800 text-white border rounded"
-      />
+        registerUser,
 
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="w-full p-2 bg-gray-800 text-white border rounded"
-      />
+        loginUser
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="w-full p-2 bg-gray-800 text-white border rounded"
-      />
+    }=useContext(AuthContext);
 
-      <button
-        type="submit"
-        className="w-full p-2 bg-green-600 text-white rounded"
-      >
-        Register
-      </button>
-    </form>
-  );
+    const navigate=useNavigate();
+
+    const submit=async(e)=>{
+
+        e.preventDefault();
+
+        setLoading(true);
+
+        try{
+
+            const response=await registerUser({
+
+                name,
+
+                email,
+
+                password
+
+            });
+
+            if(response.token){
+
+                loginUser(response.token);
+
+                navigate("/dashboard");
+
+            }else{
+
+                navigate("/");
+
+            }
+
+        }catch{
+
+            alert("Registration Failed");
+
+        }finally{
+
+            setLoading(false);
+
+        }
+
+    };
+
+    return(
+
+        <form
+            onSubmit={submit}
+            className="space-y-6"
+        >
+
+            <div>
+
+                <h2 className="text-3xl font-bold text-white">
+
+                    Create Account
+
+                </h2>
+
+                <p className="text-gray-400 mt-2">
+
+                    Join WebPilot
+
+                </p>
+
+            </div>
+
+            <Input
+
+                label="Full Name"
+
+                value={name}
+
+                placeholder="John Doe"
+
+                onChange={(e)=>setName(e.target.value)}
+
+            />
+
+            <Input
+
+                label="Email"
+
+                type="email"
+
+                value={email}
+
+                placeholder="john@gmail.com"
+
+                onChange={(e)=>setEmail(e.target.value)}
+
+            />
+
+            <Input
+
+                label="Password"
+
+                type="password"
+
+                value={password}
+
+                placeholder="Minimum 8 characters"
+
+                onChange={(e)=>setPassword(e.target.value)}
+
+            />
+
+            <Button
+
+                type="submit"
+
+                loading={loading}
+
+                className="w-full"
+
+            >
+
+                Create Account
+
+            </Button>
+
+            <p className="text-center text-gray-400">
+
+                Already have an account?{" "}
+
+                <Link
+
+                    to="/"
+
+                    className="text-[#D4AF37] hover:underline"
+
+                >
+
+                    Login
+
+                </Link>
+
+            </p>
+
+        </form>
+
+    );
+
 };
 
 export default RegisterForm;

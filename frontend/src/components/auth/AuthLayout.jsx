@@ -1,33 +1,38 @@
 import { motion } from "framer-motion";
 
 const AuthLayout = ({ children }) => {
+  return (
+    <div className="min-h-screen bg-[#090909] flex items-center justify-center relative overflow-hidden">
 
-    return (
-        <div className="min-h-screen bg-[#0f172a] flex items-center justify-center px-4">
+      <div className="absolute w-[500px] h-[500px] rounded-full bg-[#D4AF37]/10 blur-[140px] -top-40 -left-40"/>
 
-            <motion.div
-                initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="w-full max-w-md rounded-2xl border border-slate-700 bg-slate-900/80 backdrop-blur-lg shadow-2xl p-8"
-            >
-                <div className="mb-8 text-center">
+      <div className="absolute w-[400px] h-[400px] rounded-full bg-[#D4AF37]/5 blur-[130px] bottom-0 right-0"/>
 
-                    <h1 className="text-4xl font-bold text-white">
-                        WebPilot
-                    </h1>
+      <motion.div
+        initial={{ opacity: 0, y: 35 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: .45 }}
+        className="w-full max-w-md rounded-3xl border border-[#2A2A2A] bg-[#121212]/95 backdrop-blur-xl shadow-2xl p-10"
+      >
 
-                    <p className="text-slate-400 mt-2">
-                        AI Browser Automation
-                    </p>
+        <div className="mb-10 text-center">
 
-                </div>
+          <h1 className="text-4xl font-bold text-white">
+            WebPilot
+          </h1>
 
-                {children}
+          <p className="text-[#D4AF37] mt-3">
+            AI Browser Agent
+          </p>
 
-            </motion.div>
         </div>
-    );
+
+        {children}
+
+      </motion.div>
+
+    </div>
+  );
 };
 
 export default AuthLayout;

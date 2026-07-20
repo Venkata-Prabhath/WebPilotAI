@@ -12,13 +12,19 @@ public class BrowserPlanner {
 
         List<BrowserInstruction> instructions = new ArrayList<>();
 
+        if (command == null || command.isBlank()) {
+            return instructions;
+        }
+
         command = command.trim();
 
-        if (command.toLowerCase().startsWith("open ")) {
+        String lower = command.toLowerCase();
+
+        if (lower.startsWith("open ")) {
 
             String url = command.substring(5).trim();
 
-            if (!url.startsWith("http")) {
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
                 url = "https://" + url;
             }
 
@@ -26,47 +32,102 @@ public class BrowserPlanner {
                     BrowserInstruction.builder()
                             .action(BrowserAction.OPEN)
                             .target(url)
+                            .value("")
                             .build()
             );
+
+            return instructions;
         }
 
-        else if (command.toLowerCase().startsWith("search ")) {
-
-            String query = command.substring(7);
+        if (lower.startsWith("search ")) {
 
             instructions.add(
                     BrowserInstruction.builder()
                             .action(BrowserAction.SEARCH)
-                            .value(query)
+                            .target("")
+                            .value(command.substring(7).trim())
                             .build()
             );
+
+            return instructions;
         }
 
-        else if (command.equalsIgnoreCase("back")) {
+        if (lower.equals("back")) {
 
             instructions.add(
                     BrowserInstruction.builder()
                             .action(BrowserAction.BACK)
+                            .target("")
+                            .value("")
                             .build()
             );
+
+            return instructions;
         }
 
-        else if (command.equalsIgnoreCase("forward")) {
+        if (lower.equals("forward")) {
 
             instructions.add(
                     BrowserInstruction.builder()
                             .action(BrowserAction.FORWARD)
+                            .target("")
+                            .value("")
                             .build()
             );
+
+            return instructions;
         }
 
-        else if (command.equalsIgnoreCase("refresh")) {
+        if (lower.equals("refresh")) {
 
             instructions.add(
                     BrowserInstruction.builder()
                             .action(BrowserAction.REFRESH)
+                            .target("")
+                            .value("")
                             .build()
             );
+
+            return instructions;
+        }
+
+        if (lower.equals("close")) {
+
+            instructions.add(
+                    BrowserInstruction.builder()
+                            .action(BrowserAction.CLOSE)
+                            .target("")
+                            .value("")
+                            .build()
+            );
+
+            return instructions;
+        }
+
+        if (lower.equals("screenshot")) {
+
+            instructions.add(
+                    BrowserInstruction.builder()
+                            .action(BrowserAction.SCREENSHOT)
+                            .target("")
+                            .value("")
+                            .build()
+            );
+
+            return instructions;
+        }
+
+        if (lower.equals("extract")) {
+
+            instructions.add(
+                    BrowserInstruction.builder()
+                            .action(BrowserAction.EXTRACT_TEXT)
+                            .target("body")
+                            .value("")
+                            .build()
+            );
+
+            return instructions;
         }
 
         return instructions;

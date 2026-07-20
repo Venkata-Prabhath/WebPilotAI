@@ -1,12 +1,15 @@
 package com.webpilot.dto.ai;
 
-import lombok.AllArgsConstructor;
+import com.webpilot.browser.BrowserResult;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
+@Builder
 public class AgentResponse {
 
-    private String result;
+    private boolean success;
+    private String message;
+    private BrowserResult result;
 
 }
